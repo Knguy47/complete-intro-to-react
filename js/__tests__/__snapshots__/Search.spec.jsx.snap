@@ -6,7 +6,7 @@ exports[`Search renders correctly 1`] = `
 >
   <header>
     <h1>
-      svideo
+      svideo okay
     </h1>
     <input
       onChange={[Function]}
