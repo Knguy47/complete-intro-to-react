@@ -36,6 +36,6 @@ ShowCard.propTypes = {
     year: string.isRequired,
     description: string.isRequired
   }).isRequired
-}
+};
 
 export default ShowCard;

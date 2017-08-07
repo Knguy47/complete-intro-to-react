@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
+import { shape, string } from 'prop-types';
 import ShowCard from './ShowCard';
-import preload from '../data.json';
 
 class Search extends Component { 
   state = {
@@ -24,7 +24,7 @@ class Search extends Component {
           />
         </header>
         <div>
-          {preload.shows
+          {this.props.shows
             .filter(show => 
               `${show.title} ${show.description}`.toUpperCase()
                 .indexOf(this.state.searchTerm.toUpperCase()) >= 0
@@ -38,4 +38,13 @@ class Search extends Component {
   }
 }
 
+Search.propsTypes = {
+  show: shape({
+    poster: string.isRequired,
+    title: string.isRequired,
+    year: string.isRequired,
+    description: string.isRequired,
+    imdbID: string.isRequired
+  }).isRequired
+};
 export default Search;
