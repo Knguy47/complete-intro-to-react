@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { shape, string } from 'prop-types';
+import Header from './Header';
 import ShowCard from './ShowCard';
 
 class Search extends Component { 
@@ -14,15 +15,11 @@ class Search extends Component {
   render() {
     return (
       <div className="search">
-        <header>
-          <h1>svideo okay</h1>
-          <input 
-            onChange={this.handleSearchTermChange} 
-            value={this.state.searchTerm} 
-            type="text" 
-            placeholder="Search" 
-          />
-        </header>
+        <Header 
+          showSearch
+          searchTerm={this.state.searchTerm} 
+          handleSearchTermChange={this.handleSearchTermChange}
+        />
         <div>
           {this.props.shows
             .filter(show => 
@@ -47,4 +44,5 @@ Search.propTypes = {
     imdbID: string.isRequired
   }).isRequired
 };
+
 export default Search;
