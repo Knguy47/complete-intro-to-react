@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { object } from 'prop-types';
 import Landing from './Landing';
 import Search from './Search';
 import Details from './Details';
@@ -25,5 +26,9 @@ const App = () => (
     </div>
   </BrowserRouter>
 );
+
+App.propTypes = {
+  match: object
+}
 
 export default App;

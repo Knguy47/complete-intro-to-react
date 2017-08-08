@@ -38,8 +38,8 @@ class Search extends Component {
   }
 }
 
-Search.propsTypes = {
-  show: shape({
+Search.propTypes = {
+  shows: shape({
     poster: string.isRequired,
     title: string.isRequired,
     year: string.isRequired,

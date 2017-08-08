@@ -1,6 +1,7 @@
 // @flow
 
 import React from 'react';
+import { shape, string } from 'prop-types';
 import Header from './Header';
 
 const Details = (props) => {
@@ -26,5 +27,16 @@ const Details = (props) => {
     </div>
   </div>);
 };
+
+Details.propTypes = {
+  show: shape({
+    poster: string.isRequired,
+    title: string.isRequired,
+    year: string.isRequired,
+    description: string.isRequired,
+    imdbID: string.isRequired
+  }).isRequired
+};
+
 
 export default Details;
