@@ -1,48 +1,34 @@
-import React, { Component } from 'react';
-import { shape, string } from 'prop-types';
+import React from 'react';
+import { array, string } from 'prop-types';
+import { connect } from 'react-redux';
 import Header from './Header';
 import ShowCard from './ShowCard';
 
-class Search extends Component { 
-  state = {
-    searchTerm: ''
-  };
-  
-  handleSearchTermChange = (event) => {
-    this.setState({searchTerm: event.target.value})
-  };
-
-  render() {
-    return (
-      <div className="search">
-        <Header 
-          showSearch
-          searchTerm={this.state.searchTerm} 
-          handleSearchTermChange={this.handleSearchTermChange}
-        />
-        <div>
-          {this.props.shows
-            .filter(show => 
-              `${show.title} ${show.description}`.toUpperCase()
-                .indexOf(this.state.searchTerm.toUpperCase()) >= 0
-            )
-            .map(show =>
-              <ShowCard show={show} key={show.imdbID} />
-          )}
-        </div>
-      </div>
-    );
-  }
-}
+const Search = (props) => (
+  <div className="search">
+    <Header 
+      showSearch
+    />
+    <div>
+      {props.shows
+        .filter(show => 
+          `${show.title} ${show.description}`.toUpperCase()
+            .indexOf(props.searchTerm.toUpperCase()) >= 0
+        )
+        .map(show =>
+          <ShowCard show={show} key={show.imdbID} />
+      )}
+    </div>
+  </div>
+);
 
 Search.propTypes = {
-  shows: shape({
-    poster: string.isRequired,
-    title: string.isRequired,
-    year: string.isRequired,
-    description: string.isRequired,
-    imdbID: string.isRequired
-  }).isRequired
+  searchTerm: string.isRequired, // eslint-disable-line react/no-unused-prop-types
+  shows: array.isRequired
 };
 
-export default Search;
+const mapStateToProps = state => ({
+  searchTerm: state.searchTerm
+});
+
+export default connect(mapStateToProps)(Search);

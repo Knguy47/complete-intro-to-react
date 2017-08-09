@@ -1,27 +1,47 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { string, func } from 'prop-types';
+import { string, func, object } from 'prop-types';
 import { Link } from 'react-router-dom';
 import { setSearchTerm } from './actionCreators';
 
-const Landing = (props) => (
-  <div className="landing">
-    <h1>Landing Page</h1>
-    <input value={props.searchTerm} onChange={props.handleSearchTermChange} type="text" placeholder="Search" />
-    <Link to="/search">or Browse All Something</Link>
-  </div>
-);
+class Landing extends Component {
+
+  componentDidMount() {
+    this.props.clearSearchTerm();
+  }
+
+  goToSearch = (event) => {
+    event.preventDefault();
+    this.props.history.push('/search');
+  };
+
+  render() {
+    return (
+      <div className="landing">
+        <h1>Landing Page</h1>
+        <form onSubmit={this.goToSearch}>
+          <input value={this.props.searchTerm} 
+            onChange={this.props.handleSearchTermChange} 
+            type="text" 
+            placeholder="Search" 
+          />
+        </form>
+        <Link to="/search">or Browse All Something</Link>
+      </div>
+    );
+  }
+}
 
 Landing.propTypes = {
   searchTerm: string,
-  handleSearchTermChange: func,
+  handleSearchTermChange: func.isRequired,
+  history: object,
+  clearSearchTerm: func.isRequired,
 };
 
 Landing.defaultProps = {
   searchTerm: '',
-  handleSearchTermChange: () => (
-    ''
-  ),
+  history: {}
 }
 
 const mapStateToProps = (state) => ({
@@ -31,6 +51,9 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   handleSearchTermChange(event) {
     dispatch(setSearchTerm(event.target.value));
+  },
+  clearSearchTerm() {
+    dispatch(setSearchTerm(''));
   }
 });
 
