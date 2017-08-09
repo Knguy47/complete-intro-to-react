@@ -24,11 +24,17 @@ const Search = (props) => (
 
 Search.propTypes = {
   searchTerm: string.isRequired, // eslint-disable-line react/no-unused-prop-types
-  shows: array.isRequired
+  shows: array
 };
+
+Search.defaultProps = {
+   shows: [],
+}
 
 const mapStateToProps = state => ({
   searchTerm: state.searchTerm
 });
 
+
+export const Unwrapped = Search;
 export default connect(mapStateToProps)(Search);

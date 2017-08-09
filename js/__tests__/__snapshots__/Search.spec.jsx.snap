@@ -4,17 +4,9 @@ exports[`Search renders correctly 1`] = `
 <div
   className="search"
 >
-  <header>
-    <h1>
-      svideo okay
-    </h1>
-    <input
-      onChange={[Function]}
-      placeholder="Search"
-      type="text"
-      value=""
-    />
-  </header>
+  <Connect(Header)
+    showSearch={true}
+  />
   <div>
     <ShowCard
       show={
